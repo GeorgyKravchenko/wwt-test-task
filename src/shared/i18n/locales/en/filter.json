@@ -1,5 +1,6 @@
 {
     "filter": "Filter",
+    "pageTitle": "WinWinTravel Frontend Test Task",
     "currentFilter": "Current Filter (Global State)",
     "allFilters": "All Filters (Global State)",
     "total": "total",

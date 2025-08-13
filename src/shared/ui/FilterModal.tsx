@@ -1,26 +1,64 @@
+import { useState } from 'react'
+
 import i18next from 'i18next'
 
 import { FilterItem } from '../api/types/Filter/FilterItem'
 import { Button } from './Button'
+import { ConfirmDialog } from './ConfirmDialog'
 import { Filter } from './Filter'
 
 interface FilterModalProps {
 	filters: FilterItem[]
 	isOpen: boolean
 	onClose: () => void
-	onApply: () => void
-	onClear: () => void
+	onApply: (selections: Record<string, string[]>) => void
 }
 
 export const FilterModal = ({
 	filters,
 	isOpen,
 	onClose,
-	onApply,
-	onClear
+	onApply
 }: FilterModalProps) => {
+	const [selections, setSelections] = useState<Record<string, string[]>>({})
+	const [isConfirmDialogOpen, setConfirmDialogOpen] = useState(false)
+
 	if (!isOpen) {
 		return null
+	}
+
+	const handleToggleOption = (filterId: string, optionId: string) => {
+		setSelections(prev => {
+			const currentSelections = prev[filterId] || []
+			const newSelections = { ...prev }
+			if (currentSelections.includes(optionId)) {
+				newSelections[filterId] = currentSelections.filter(
+					id => id !== optionId
+				)
+			} else {
+				newSelections[filterId] = [...currentSelections, optionId]
+			}
+			return newSelections
+		})
+	}
+
+	const handleApply = () => {
+		setConfirmDialogOpen(true)
+	}
+
+	const handleConfirmApply = () => {
+		onApply(selections)
+		setSelections({})
+		setConfirmDialogOpen(false)
+		onClose()
+	}
+
+	const handleCancelApply = () => {
+		setConfirmDialogOpen(false)
+	}
+
+	const handleClear = () => {
+		setSelections({})
 	}
 
 	return (
@@ -59,22 +97,32 @@ export const FilterModal = ({
 						<Filter
 							key={filter.id}
 							filter={filter}
+							selections={selections[filter.id] || []}
+							onToggleOption={handleToggleOption}
 						/>
 					))}
 				</section>
 				<div className=" relative flex justify-center items-center">
 					<Button
-						onClick={onApply}
+						onClick={handleApply}
 						textKey="Apply"
 					/>
 					<button
-						onClick={onClear}
+						onClick={handleClear}
 						className="absolute cursor-pointer underline text-cyan-700 right-0"
 					>
 						{i18next.t('Clear all parameters')}
 					</button>
 				</div>
 			</div>
+			<ConfirmDialog
+				isOpen={isConfirmDialogOpen}
+				onConfirm={handleConfirmApply}
+				onCancel={handleCancelApply}
+				title={i18next.t('Confirm Changes')}
+			>
+				{i18next.t('Are you sure you want to apply these changes?')}
+			</ConfirmDialog>
 		</div>
 	)
 }

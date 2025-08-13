@@ -1,3 +1,8 @@
 {
-    "filter": "Filter"
+    "filter": "Filter",
+    "currentFilter": "Current Filter (Global State)",
+    "allFilters": "All Filters (Global State)",
+    "total": "total",
+    "noFiltersApplied": "No filters applied yet",
+    "openFilterModal": "Open the filter modal above to start filtering"
 }

@@ -41,7 +41,7 @@ export const ConfirmDialog = ({
 						onClick={onCancel}
 						className="underline text-cyan-700"
 					>
-						{i18next.t('Cancel')}
+						{i18next.t('Cancel', { defaultValue: 'Cancel' })}
 					</button>
 				</div>
 			</div>

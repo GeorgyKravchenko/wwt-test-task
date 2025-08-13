@@ -13,5 +13,6 @@ i18n.use(initReactI18next).init({
 	interpolation: {
 		escapeValue: false
 	},
-	defaultNS: I18N_DEFAULT_NS
+	defaultNS: I18N_DEFAULT_NS,
+	returnNull: false
 })

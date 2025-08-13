@@ -1,6 +1,5 @@
 import React from 'react'
-
-import i18next from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 interface ButtonProps {
 	textKey: string
@@ -15,13 +14,15 @@ export const Button: React.FC<ButtonProps> = ({
 	className = '',
 	disabled = false
 }) => {
+	const { t } = useTranslation()
+
 	return (
 		<button
-			className={`cursor-pointer font-semibold bg-orange-500 text-white py-[26px] px-[70px] rounded-2xl ${className}`}
+			className={`cursor-pointer font-semibold bg-orange-500 text-white py-[26px] px-[70px] rounded-2xl transition-all duration-300 ease-out transform hover:scale-105 hover:-translate-y-1 hover:shadow-xl active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 ${className}`}
 			onClick={onClick}
 			disabled={disabled}
 		>
-			{i18next.t(textKey)}
+			{t(textKey, { defaultValue: textKey })}
 		</button>
 	)
 }

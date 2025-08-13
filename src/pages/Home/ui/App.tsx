@@ -38,10 +38,10 @@ export const App = () => {
 			<div className="max-w-6xl mx-auto">
 				<div className="text-center mb-8">
 					<h1 className="text-5xl font-bold text-gray-800 mb-4">
-						{t('filter.pageTitle')}
+						{t('pageTitle')}
 					</h1>
 					<Button
-						textKey="Open filter modal"
+						textKey="openFilterModal"
 						onClick={() => setIsOpen(true)}
 					/>
 				</div>
@@ -51,7 +51,7 @@ export const App = () => {
 						<div className="bg-white rounded-lg shadow-lg border-l-4 border-l-blue-500 p-6">
 							<h2 className="text-xl font-bold text-blue-800 mb-4 flex items-center">
 								<span className="w-3 h-3 bg-blue-500 rounded-full mr-3"></span>
-								{t('filter.currentFilter')}
+								{t('currentFilter')}
 							</h2>
 							<div className="bg-gray-50 rounded-lg p-4 max-h-64 overflow-y-auto">
 								<pre className="text-sm text-gray-800 whitespace-pre-wrap">
@@ -65,7 +65,7 @@ export const App = () => {
 						<div className="bg-white rounded-lg shadow-lg border-l-4 border-l-green-500 p-6">
 							<h2 className="text-xl font-bold text-green-800 mb-4 flex items-center">
 								<span className="w-3 h-3 bg-green-500 rounded-full mr-3"></span>
-								{t('filter.allFilters')} - {filters.length} {t('filter.total')}
+								{t('allFilters')} - {filters.length} {t('total')}
 							</h2>
 							<div className="bg-gray-50 rounded-lg p-4 max-h-64 overflow-y-auto">
 								<pre className="text-sm text-gray-800 whitespace-pre-wrap">
@@ -81,9 +81,11 @@ export const App = () => {
 							<div className="bg-white rounded-lg shadow-lg p-8 text-center">
 								<div className="text-gray-400 text-6xl mb-4">🔍</div>
 								<h3 className="text-xl font-semibold text-gray-600 mb-2">
-									{t('filter.noFiltersApplied')}
+									{t('noFiltersApplied')}
 								</h3>
-								<p className="text-gray-500">{t('filter.openFilterModal')}</p>
+								<p className="text-gray-500">
+									{t('openFilterModalDescription')}
+								</p>
 							</div>
 						)}
 				</div>

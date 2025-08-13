@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { FilterChoose } from '@/shared/api/types/Filter'
 import { SearchRequestFilter } from '@/shared/api/types/SearchRequest/SearchRequestFilter'
 import useFiltersStore from '@/shared/lib/store'
 import { filterData } from '@/shared/temp'
@@ -27,7 +28,7 @@ export const App = () => {
 			optionsIds: values
 		}))
 
-		const newFilter: SearchRequestFilter = filterItems
+		const newFilter: SearchRequestFilter = filterItems as SearchRequestFilter
 		setCurrentFilter(newFilter)
 		addFilter(newFilter)
 	}
@@ -89,7 +90,7 @@ export const App = () => {
 			</div>
 
 			<FilterModal
-				filters={filterData.filterItems}
+				filters={filterData.filterItems as FilterChoose[]}
 				isOpen={isOpen}
 				onClose={() => setIsOpen(false)}
 				onApply={handleApply}
